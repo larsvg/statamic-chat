@@ -6,6 +6,18 @@ tabs:
         display: Widget
         fields:
           -
+            handle: active
+            field:
+              default: true
+              type: toggle
+              display: Active
+              icon: toggle
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
             handle: theme
             field:
               options:
@@ -24,6 +36,7 @@ tabs:
               instructions_position: above
               visibility: visible
               hide_display: false
+              width: 50
           -
             handle: thumbnail
             field:

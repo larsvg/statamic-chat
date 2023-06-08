@@ -1,5 +1,6 @@
 title: 'Chat widget'
 data:
+  active: true
   theme: primary
   text: 'How can we help?'
   show_indication: true
