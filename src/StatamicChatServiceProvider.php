@@ -3,9 +3,9 @@
 namespace Larsvg\StatamicChat;
 
 use Larsvg\StatamicChat\Commands\Publish;
+use Larsvg\StatamicChat\Commands\StatamicChatCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Larsvg\StatamicChat\Commands\StatamicChatCommand;
 
 class StatamicChatServiceProvider extends PackageServiceProvider
 {

@@ -3,8 +3,8 @@
 namespace Larsvg\StatamicChat\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Larsvg\StatamicChat\StatamicChatServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

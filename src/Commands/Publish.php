@@ -4,9 +4,7 @@ namespace Larsvg\StatamicChat\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Commands\SharedFunctions;
-use Symfony\Component\Yaml\Yaml;
 
 class Publish extends Command
 {
@@ -28,7 +26,6 @@ class Publish extends Command
         return self::SUCCESS;
     }
 
-
     protected function publishBlueprints(): void
     {
         $blueprints = [
@@ -36,7 +33,7 @@ class Publish extends Command
         ];
 
         foreach ($blueprints as $blueprint) {
-            File::copy(__DIR__ . '/../../stubs/blueprints/' . $blueprint, resource_path('blueprints/' . $blueprint));
+            File::copy(__DIR__.'/../../stubs/blueprints/'.$blueprint, resource_path('blueprints/'.$blueprint));
         }
     }
 
@@ -47,7 +44,7 @@ class Publish extends Command
         ];
 
         foreach ($views as $view) {
-            File::copy(__DIR__ . '/../../stubs/views/' . $view, resource_path('views/' . $view));
+            File::copy(__DIR__.'/../../stubs/views/'.$view, resource_path('views/'.$view));
         }
     }
 
@@ -56,33 +53,32 @@ class Publish extends Command
         $fieldsets = [];
 
         foreach ($fieldsets as $fieldset) {
-            File::copy(__DIR__ . '/../../stubs/fieldsets/' . $fieldset, resource_path('fieldsets/' . $fieldset));
+            File::copy(__DIR__.'/../../stubs/fieldsets/'.$fieldset, resource_path('fieldsets/'.$fieldset));
         }
     }
 
     protected function publishContent(): void
     {
         $primaryColor = $this->getPrimaryColorFromTailwindConfig();
-        $contents     = [
+        $contents = [
             'globals/chat_widget.yaml',
         ];
 
         foreach ($contents as $content) {
-            $file = 'content/' . $content;
-            File::copy(__DIR__ . '/../../stubs/content/' . $content, base_path($file));
+            $file = 'content/'.$content;
+            File::copy(__DIR__.'/../../stubs/content/'.$content, base_path($file));
             //file_put_contents($file, str_replace("rgba(63, 166, 204, 1)", $primaryColor, file_get_contents($file)));
         }
     }
 
     protected function getPrimaryColorFromTailwindConfig(): string
     {
-        $configPath     = base_path('tailwind.config.site.js');
+        $configPath = base_path('tailwind.config.site.js');
         $configContents = file_get_contents($configPath);
-        $pattern        = '/primary:\s+{\s+DEFAULT:\s+([\'"])(#[a-fA-F0-9]{6})\1/';
-        $matches        = [];
+        $pattern = '/primary:\s+{\s+DEFAULT:\s+([\'"])(#[a-fA-F0-9]{6})\1/';
+        $matches = [];
         preg_match($pattern, $configContents, $matches);
 
         return $matches[2];
     }
-
 }
