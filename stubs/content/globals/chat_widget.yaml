@@ -1,6 +1,12 @@
 title: 'Chat widget'
 data:
-  text: 'Gratis locatiebezoek'
-  link: 'entry::5c526dbf-9dd7-4c52-98d8-54e00ebddfb6'
-  phone_number: 'https://wa.me/+31655555555'
-  active: true
+  theme: primary
+  text: 'How can we help?'
+  show_indication: true
+  office_hours: false
+  show_email_form: true
+  email_button_text: 'Request quote'
+  email_form: contact
+  show_whatsapp_button: true
+  button_text: 'Contact via Whatsapp'
+  link: 'https://wa.me/+31655555555'

@@ -1,55 +1,213 @@
-sections:
+tabs:
   chat_widget:
     display: 'Chat widget'
-    fields:
+    sections:
       -
-        handle: text
-        field:
-          input_type: text
-          antlers: false
-          display: Tekst
-          type: text
-          icon: text
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-          validate:
-            - required
+        display: Widget
+        fields:
+          -
+            handle: theme
+            field:
+              options:
+                primary: 'Primary color'
+                green: Green
+              taggable: false
+              push_tags: false
+              multiple: false
+              clearable: false
+              searchable: true
+              cast_booleans: false
+              type: select
+              display: Theme
+              icon: select
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
+            handle: thumbnail
+            field:
+              max_files: 1
+              mode: list
+              container: images
+              restrict: false
+              allow_uploads: true
+              show_filename: true
+              show_set_alt: true
+              type: assets
+              display: Thumbnail
+              icon: assets
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
+            handle: text
+            field:
+              input_type: text
+              antlers: false
+              type: text
+              display: Text
+              icon: text
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+              validate:
+                - required
       -
-        handle: link
-        field:
-          display: Link
-          type: link
-          icon: link
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-          validate:
-            - required
+        display: Indication
+        fields:
+          -
+            handle: show_indication
+            field:
+              default: true
+              type: toggle
+              display: 'Show indication'
+              icon: toggle
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+              validate:
+                - required
+          -
+            handle: office_hours
+            field:
+              default: false
+              type: toggle
+              display: 'Office hours'
+              icon: toggle
+              instructions: 'Only during office hours'
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
       -
-        handle: phone_number
-        field:
-          display: 'Telefoon nummer'
-          type: link
-          icon: link
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-          validate:
-            - required
+        display: 'Pop open'
+        fields:
+          -
+            handle: introduction
+            field:
+              buttons:
+                - h2
+                - h3
+                - bold
+                - italic
+                - unorderedlist
+                - orderedlist
+                - removeformat
+                - anchor
+              smart_typography: false
+              save_html: false
+              inline: false
+              toolbar_mode: fixed
+              reading_time: false
+              fullscreen: false
+              allow_source: false
+              enable_input_rules: true
+              enable_paste_rules: true
+              remove_empty_nodes: false
+              antlers: false
+              link_noopener: false
+              link_noreferrer: false
+              target_blank: false
+              always_show_set_button: false
+              collapse: false
+              previews: true
+              type: bard
+              display: Introduction
+              icon: bard
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
       -
-        handle: active
-        field:
-          default: true
-          display: Actief
-          type: toggle
-          icon: toggle
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-          validate:
-            - required
+        display: Email
+        fields:
+          -
+            handle: show_email_form
+            field:
+              default: true
+              type: toggle
+              display: 'Show email form'
+              icon: toggle
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
+            handle: email_button_text
+            field:
+              input_type: text
+              default: 'Request quote'
+              antlers: false
+              type: text
+              display: 'Email button text'
+              icon: text
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+              validate:
+                - required
+          -
+            handle: email_form
+            field:
+              max_items: 1
+              type: form
+              display: Form
+              icon: form
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+      -
+        display: Whatsapp
+        fields:
+          -
+            handle: show_whatsapp_button
+            field:
+              default: false
+              type: toggle
+              display: 'Show Whatsapp button'
+              icon: toggle
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+              validate:
+                - required
+          -
+            handle: button_text
+            field:
+              input_type: text
+              default: 'Contact via Whatsapp'
+              antlers: false
+              type: text
+              display: 'Button text'
+              icon: text
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
+            handle: link
+            field:
+              type: link
+              display: Link
+              icon: link
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+              validate:
+                - required
