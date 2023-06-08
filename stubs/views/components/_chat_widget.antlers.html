@@ -1,0 +1,30 @@
+{{ if (chat_widget:active) }}
+    <div class="z-[300] fixed bottom-0 left-0 sm:left-auto right-0 bg-primary sm:bg-transparent text-white flex justify-between gap-8 items-center">
+        <a href="{{ chat_widget:link }}" class="px-4 py-2 flex gap-2 sm:hidden">
+            <span>
+                {{ chat_widget:text }}
+            </span>
+
+            <b class="font-bold">
+                {{ svg:arrow-long-right class="h-auto w-5 mt-[2px] fill-current" }}
+            </b>
+        </a>
+        {{ if (chat_widget:phone_number > '') }}
+            <a href="{{ chat_widget:phone_number }}" target="_blank">
+               <div class="bg-primary hover:bg-primary transition-all p-3 hover:p-5 rounded-full shadow-lg -mt-4 mr-4 mb-2">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                       <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
+                   </svg>
+               </div>
+            </a>
+        {{ /if }}
+    </div>
+
+    <a href="{{ chat_widget:link }}" class="z-[300] fixed right-0 top-[50%] -mt-8 text-white hidden sm:flex justify-center gap-8 items-center ">
+        <div class="relative  px-4 py-2 flex gap-2 bg-primary hover:bg-primary z-[300] rotate-90 -mr-20 hover:scale-110 hover:bg-opacity-[85%] rounded-br-2xl rounded-bl-2xl transition-all">
+            <span class="mt-2 p-2">
+                {{ chat_widget:text }}
+            </span>
+        </div>
+    </a>
+{{ /if }}

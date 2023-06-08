@@ -1,0 +1,55 @@
+sections:
+  chat_widget:
+    display: 'Chat widget'
+    fields:
+      -
+        handle: text
+        field:
+          input_type: text
+          antlers: false
+          display: Tekst
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: link
+        field:
+          display: Link
+          type: link
+          icon: link
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: phone_number
+        field:
+          display: 'Telefoon nummer'
+          type: link
+          icon: link
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: active
+        field:
+          default: true
+          display: Actief
+          type: toggle
+          icon: toggle
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required

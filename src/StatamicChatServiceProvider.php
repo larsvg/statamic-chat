@@ -2,6 +2,7 @@
 
 namespace Larsvg\StatamicChat;
 
+use Larsvg\StatamicChat\Commands\Publish;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Larsvg\StatamicChat\Commands\StatamicChatCommand;
@@ -20,6 +21,7 @@ class StatamicChatServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_statamic-chat_table')
+            ->hasCommand(Publish::class)
             ->hasCommand(StatamicChatCommand::class);
     }
 }
