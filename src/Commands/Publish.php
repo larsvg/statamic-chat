@@ -16,10 +16,14 @@ class Publish extends Command
 
     public function handle(): int
     {
+        File::makeDirectory(resource_path('blueprints/forms'), 0755, true, true);
+        File::makeDirectory(resource_path('forms'), 0755, true, true);
+
         $this->publishFieldsets();
         $this->publishBlueprints();
         $this->publishContent();
         $this->publishViews();
+        $this->publishForms();
 
         $this->comment('Chat widget published');
 
@@ -30,6 +34,7 @@ class Publish extends Command
     {
         $blueprints = [
             'globals/chat_widget.yaml',
+            'forms/chat_widget.yaml',
         ];
 
         foreach ($blueprints as $blueprint) {
@@ -54,6 +59,17 @@ class Publish extends Command
 
         foreach ($fieldsets as $fieldset) {
             File::copy(__DIR__.'/../../stubs/fieldsets/'.$fieldset, resource_path('fieldsets/'.$fieldset));
+        }
+    }
+
+    protected function publishForms(): void
+    {
+        $forms = [
+            'chat_widget_mail',
+        ];
+
+        foreach ($forms as $form) {
+            File::copy(__DIR__.'/../../stubs/forms/'.$form, resource_path('forms/'.$form));
         }
     }
 

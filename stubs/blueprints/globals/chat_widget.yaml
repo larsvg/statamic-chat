@@ -171,12 +171,61 @@ tabs:
               validate:
                 - required
           -
+            handle: email_buttons
+            field:
+              collapse: false
+              previews: true
+              fullscreen: true
+              sets:
+                new_set_group:
+                  display: 'New Set Group'
+                  instructions: null
+                  icon: null
+                  sets:
+                    email_ctas:
+                      display: "Email CTA's"
+                      instructions: null
+                      icon: null
+                      fields:
+                        -
+                          handle: email_button
+                          field:
+                            input_type: text
+                            antlers: false
+                            type: text
+                            display: 'Email CTA'
+                            icon: text
+                            listable: hidden
+                            instructions_position: above
+                            visibility: visible
+                            hide_display: false
+              type: replicator
+              display: 'Email buttons'
+              icon: replicator
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
             handle: email_form
             field:
               max_items: 1
               type: form
               display: Form
               icon: form
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
+            handle: button_label
+            field:
+              input_type: text
+              default: Submit
+              antlers: false
+              type: text
+              display: 'Button label'
+              icon: text
               listable: hidden
               instructions_position: above
               visibility: visible
@@ -213,7 +262,7 @@ tabs:
               visibility: visible
               hide_display: false
           -
-            handle: link
+            handle: whatsapp_link
             field:
               type: link
               display: Link
@@ -224,3 +273,58 @@ tabs:
               hide_display: false
               validate:
                 - required
+      -
+        display: Links
+        fields:
+          -
+            handle: links
+            field:
+              collapse: false
+              previews: true
+              fullscreen: true
+              sets:
+                new_set_group:
+                  display: 'New Set Group'
+                  instructions: null
+                  icon: null
+                  sets:
+                    links:
+                      display: Links
+                      instructions: null
+                      icon: null
+                      fields:
+                        -
+                          handle: link
+                          field:
+                            type: link
+                            display: Link
+                            icon: link
+                            width: 50
+                            listable: hidden
+                            instructions_position: above
+                            visibility: visible
+                            hide_display: false
+                            validate:
+                              - required
+                        -
+                          handle: link_name
+                          field:
+                            input_type: text
+                            antlers: false
+                            type: text
+                            display: 'Link name'
+                            icon: text
+                            width: 50
+                            listable: hidden
+                            instructions_position: above
+                            visibility: visible
+                            hide_display: false
+                            validate:
+                              - required
+              type: replicator
+              display: Links
+              icon: replicator
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false

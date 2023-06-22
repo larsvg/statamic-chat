@@ -1,13 +1,63 @@
 title: 'Chat widget'
 data:
   active: true
-  theme: primary
+  theme: green
   text: 'How can we help?'
   show_indication: true
-  office_hours: false
+  office_hours: true
+  introduction:
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          marks:
+            -
+              type: bold
+          text: Herbert
+        -
+          type: text
+          text: ' van marketingreus.nl'
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: 'Goedemiddag 👋'
+        -
+          type: hardBreak
+        -
+          type: text
+          text: 'Kan ik je ergens mee helpen?'
   show_email_form: true
   email_button_text: 'Request quote'
-  email_form: contact
+  email_buttons:
+    -
+      id: lix4ib95
+      email_button: 'Request quote'
+      type: email_ctas
+      enabled: true
+    -
+      id: lix4idj6
+      email_button: 'Send an email'
+      type: email_ctas
+      enabled: true
+  email_form: chat_widget_mail
+  button_label: Submit
   show_whatsapp_button: true
   button_text: 'Contact via Whatsapp'
-  link: 'https://wa.me/+31655555555'
+  whatsapp_link: 'https://wa.me/+31655555555'
+  links:
+    -
+      id: lix66edd
+      link_field: 'entry::2d07995a-8932-41c5-9cee-dd4a7e8c1226'
+      link_name: 'Read our articles'
+      type: links
+      enabled: true
+      link: 'entry::2d07995a-8932-41c5-9cee-dd4a7e8c1226'
+    -
+      id: lix7v7vm
+      link: 'entry::5c526dbf-9dd7-4c52-98d8-54e00ebddfb6'
+      link_name: Help
+      type: links
+      enabled: true

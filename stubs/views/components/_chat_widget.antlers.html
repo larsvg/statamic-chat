@@ -1,25 +1,143 @@
 {{ if (chat_widget:active) }}
-    <div class="z-[300] fixed bottom-0 left-0 sm:left-auto right-0 bg-primary sm:bg-transparent text-white flex justify-between gap-8 items-center">
-        <a href="{{ chat_widget:link }}" class="px-4 py-2 flex gap-2 sm:hidden">
-            <span>
-                {{ chat_widget:text }}
-            </span>
 
-            <b class="font-bold">
-                {{ svg:arrow-long-right class="h-auto w-5 mt-[2px] fill-current" }}
-            </b>
-        </a>
-        {{ if (chat_widget:phone_number > '') }}
-            <a href="{{ chat_widget:phone_number }}" target="_blank">
-               <div class="bg-primary hover:bg-primary transition-all p-3 hover:p-5 rounded-full shadow-lg -mt-4 mr-4 mb-2">
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                       <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
-                   </svg>
-               </div>
-            </a>
-        {{ /if }}
+    <div class="z-[300] w-full max-w-[340px] fixed bottom-3 right-3 flex flex-col gap-4" x-data="{ showText: false, popupOpen:false, mailFormOpen: false, mailAction: '' }">
+
+        <div class="flex flex-col gap-4" x-show="popupOpen" x-cloak x-transition:enter.duration.100ms>
+            <div class="bg-white text-sm p-4 shadow-xl rounded-xl">
+                {{ chat_widget:introduction }}
+            </div>
+
+            <div class="flex flex-row justify-end flex-wrap gap-4">
+
+                {{ if (chat_widget:show_whatsapp_button) }}
+
+                    <a href="{{ chat_widget:whatsapp_link }}" target="_blank" class="flex text-xs justify-end">
+                        <div class="{{ if (chat_widget:theme  === 'primary') }} bg-primary {{ else }} bg-green-500 {{ /if }} text-white text-sm px-4 py-2 shadow-xl rounded-xl">
+                            {{ chat_widget:button_text }}
+                        </div>
+                    </a>
+
+                {{ /if }}
+
+                {{ chat_widget:email_buttons }}
+
+                    <div class="flex justify-end cursor-pointer text-xs" @click="mailFormOpen = !mailFormOpen; mailAction ='{{ email_button }}'" x-show="!mailFormOpen" x-cloak>
+                        <div class="{{ if (chat_widget:theme  === 'primary') }} bg-primary {{ else }} bg-green-500 {{ /if }} text-white text-sm px-4 py-2 shadow-xl rounded-xl">
+                            {{ email_button }}
+                        </div>
+                    </div>
+
+                {{ /chat_widget:email_buttons }}
+
+                {{ chat_widget:links }}
+
+                    <a href="{{ link }}" class="flex text-xs justify-end">
+                        <div class="{{ if (chat_widget:theme  === 'primary') }} bg-primary {{ else }} bg-green-500 {{ /if }} text-white text-sm px-4 py-2 shadow-xl rounded-xl">
+                            {{ link_name }}
+                        </div>
+                    </a>
+
+                {{ /chat_widget:links }}
+
+            </div>
+        </div>
+
+        <div class="bg-white w-full text-sm p-4 shadow-xl rounded-xl" x-show="mailFormOpen && popupOpen" x-cloak x-transition:enter.duration.100ms>
+            {{ if (chat_widget:email_form) }}
+
+                {{ form:create in="{ chat_widget:email_form:handle }"
+                    id="form-{chat_widget:email_form:handle}"
+                    class="flex flex-wrap"
+                    x-ref="form"
+                    x-data="sending"
+                    @submit.prevent="sendForm()"
+                }}
+
+                    {{ if success }}
+                        <div class="bg-green-300 text-white p-2">
+                            {{ success }}
+                        </div>
+                    {{ else }}
+
+                        {{ if errors }}
+                            <div class="bg-red-300 text-white p-2">
+                                {{ errors }}
+                                    {{ value }}<br>
+                                {{ /errors }}
+                            </div>
+                        {{ /if }}
+
+                        <div class="grid grid-cols-12 gap-y-4 gap-x-4 w-full">
+
+                            {{ fields }}
+                                {{ if (handle !== 'action_name') }}
+
+                                    <div class="{{ handle === 'preferred_date' || width == '50'  ? 'col-span-6' : 'col-span-12' }} ">
+                                        <div>
+                                            <template x-if="errors.{{ handle }}">
+                                                <span class="text-red-300" id="{{ handle }}" x-text="errors.{{ handle}}"></span>
+                                            </template>
+
+                                            {{ field }}
+                                        </div>
+                                        {{ if error }}
+                                            <p class="text-gray-500">{{ error }}</p>
+                                        {{ /if }}
+                                    </div>
+
+                                {{ /if }}
+                            {{ /fields }}
+
+                            <input type="hidden" name="action_name" x-model="mailAction" />
+
+                            <div class="hidden">
+                                <label class="font-bold" for="{{ honeypot ?? 'honeypot' }}">{{ trans:strings.form_honeypot }} <sup class="text-yellow-400">*</sup></label>
+                                <input class="form-input w-full" id="{{ honeypot ?? 'honeypot' }}" type="text" name="{{ honeypot }}" tabindex="-1" autocomplete="off"/>
+                            </div>
+
+                        </div>
+
+                        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+
+                        <div class="mt-4"  :class="{ 'opacity-25 cursor-default': sending }">
+                            {{ partial:components/button as="button" type="submit" :label="chat_widget:button_label" }}
+                        </div>
+
+                    {{ /if }}
+
+                {{ /form:create }}
+
+            {{ /if }}
+        </div>
+
+        <div class="flex items-center justify-end gap-2" @click="popupOpen = !popupOpen">
+            <div class="bg-white rounded-lg p-2 shadow-xl cursor-pointer relative"  x-show="showText && !popupOpen" x-cloak x-init="setTimeout(() => showText = true, 2000)" x-transition:enter.duration.500ms>
+                {{ if (chat_widget:show_indication) }}
+                    <div class="bg-green-500 w-3 h-3 absolute top-[-6px] left-[-6px] rounded-full shadow-xl"></div>
+                {{ /if }}
+                {{ chat_widget:text }}
+            </div>
+
+            <div class="text-white {{ if (chat_widget:theme  === 'primary') }} bg-primary {{ else }} bg-green-500 {{ /if }} transition-all rounded-full shadow-lg hover:cursor-pointer"
+                 x-data="{ show: false }" x-show="show" x-init="setTimeout(() => show = true, 1000)" x-transition:enter.duration.200ms
+            >
+                {{ if (chat_widget:thumbnail) }}
+                    <div class="hover:scale-125 transition">
+                        <img src="{{ chat_widget:thumbnail }}" class="w-10 h-10 rounded-full" />
+                    </div>
+                {{ else }}
+                    <div class="p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                {{ /if }}
+            </div>
+        </div>
+
     </div>
 
+    <!--
     <a href="{{ chat_widget:link }}" class="z-[300] fixed right-0 top-[50%] -mt-8 text-white hidden sm:flex justify-center gap-8 items-center ">
         <div class="relative  px-4 py-2 flex gap-2 bg-primary hover:bg-primary z-[300] rotate-90 -mr-20 hover:scale-110 hover:bg-opacity-[85%] rounded-br-2xl rounded-bl-2xl transition-all">
             <span class="mt-2 p-2">
@@ -27,4 +145,5 @@
             </span>
         </div>
     </a>
+    -->
 {{ /if }}
