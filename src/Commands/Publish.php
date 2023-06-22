@@ -34,7 +34,7 @@ class Publish extends Command
     {
         $blueprints = [
             'globals/chat_widget.yaml',
-            'forms/chat_widget.yaml',
+            'forms/chat_widget_mail.yaml',
         ];
 
         foreach ($blueprints as $blueprint) {
@@ -65,7 +65,7 @@ class Publish extends Command
     protected function publishForms(): void
     {
         $forms = [
-            'chat_widget_mail',
+            'chat_widget_mail.yaml',
         ];
 
         foreach ($forms as $form) {
