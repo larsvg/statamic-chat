@@ -76,7 +76,7 @@ class Publish extends Command
     protected function publishContent(): void
     {
         if (file_exists(base_path('content/globals/chat_widget.yaml'))) {
-            if (!$this->confirm('Replace content files?', true)) {
+            if (! $this->confirm('Replace content files?', true)) {
                 return;
             }
         }
