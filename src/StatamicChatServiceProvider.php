@@ -26,7 +26,6 @@ class StatamicChatServiceProvider extends PackageServiceProvider
             ->name('statamic-chat')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_statamic-chat_table')
             ->hasCommand(Publish::class)
             ->hasCommand(StatamicChatCommand::class);
     }
