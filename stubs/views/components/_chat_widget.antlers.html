@@ -42,7 +42,13 @@
             </div>
         </div>
 
-        <div class="bg-white w-full text-sm p-4 shadow-xl rounded-xl" x-show="mailFormOpen && popupOpen" x-cloak x-transition:enter.duration.100ms>
+        <div class="bg-white w-full text-sm p-4 shadow-xl rounded-xl relative" x-show="mailFormOpen && popupOpen" x-cloak x-transition:enter.duration.100ms>
+            <div class="absolute -left-2 -top-2 bg-white rounded-full cursor-pointer" @click="mailFormOpen = false;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+
             {{ if (chat_widget:email_form) }}
 
                 {{ form:create in="{ chat_widget:email_form:handle }"

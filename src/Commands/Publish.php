@@ -75,7 +75,12 @@ class Publish extends Command
 
     protected function publishContent(): void
     {
-        $primaryColor = $this->getPrimaryColorFromTailwindConfig();
+        if (file_exists(base_path('content/globals/chat_widget.yaml'))) {
+            if (!$this->confirm('Replace content files?', true)) {
+                return;
+            }
+        }
+
         $contents = [
             'globals/chat_widget.yaml',
         ];
@@ -83,7 +88,6 @@ class Publish extends Command
         foreach ($contents as $content) {
             $file = 'content/'.$content;
             File::copy(__DIR__.'/../../stubs/content/'.$content, base_path($file));
-            //file_put_contents($file, str_replace("rgba(63, 166, 204, 1)", $primaryColor, file_get_contents($file)));
         }
     }
 
