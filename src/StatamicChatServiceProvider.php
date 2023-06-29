@@ -2,15 +2,22 @@
 
 namespace Larsvg\StatamicChat;
 
+use Illuminate\Support\Facades\View;
 use Larsvg\StatamicChat\Commands\Publish;
 use Larsvg\StatamicChat\Commands\StatamicChatCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Statamic\Statamic;
 
 class StatamicChatServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
+        Statamic::booted(function () {
+            View::share('office_hours', StatamicChat::officeHours());
+        });
+
+
         /*
          * This class is a Package Service Provider
          *

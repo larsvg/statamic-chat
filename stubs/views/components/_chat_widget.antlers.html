@@ -113,7 +113,12 @@
         <div class="flex items-center justify-end gap-2" @click="popupOpen = !popupOpen">
             <div class="bg-white rounded-lg p-2 shadow-xl cursor-pointer relative"  x-show="showText && !popupOpen" x-cloak x-init="setTimeout(() => showText = true, 2000)" x-transition:enter.duration.500ms>
                 {{ if (chat_widget:show_indication) }}
-                    <div class="bg-green-500 w-3 h-3 absolute top-[-6px] left-[-6px] rounded-full shadow-xl"></div>
+                    {{ if (!chat_widget:office_hours || (chat_widget:office_hours && office_hours)) }}
+
+                        <div class="bg-green-500 w-3 h-3 absolute top-[-6px] left-[-6px] rounded-full shadow-xl"></div>
+
+                    {{ /if }}
+
                 {{ /if }}
                 {{ chat_widget:text }}
             </div>
