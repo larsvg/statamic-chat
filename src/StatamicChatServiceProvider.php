@@ -17,7 +17,6 @@ class StatamicChatServiceProvider extends PackageServiceProvider
             View::share('office_hours', StatamicChat::officeHours());
         });
 
-
         /*
          * This class is a Package Service Provider
          *

@@ -17,7 +17,7 @@ class StatamicChat
         if (Carbon::now()->isAfter(Carbon::createFromTime(17, 30))) {
             return false;
         }
+
         return true;
     }
-
 }
