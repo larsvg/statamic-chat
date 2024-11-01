@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
 
-trait SharedFunctions {
-
+trait SharedFunctions
+{
     /**
      * Check if a file doesn't already exist.
      *
@@ -36,9 +36,9 @@ trait SharedFunctions {
             'display' => $name,
             'fields' => [
                 [
-                    'import' => $filename
-                ]
-            ]
+                    'import' => $filename,
+                ],
+            ],
         ];
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
@@ -75,9 +75,9 @@ trait SharedFunctions {
             'instructions' => $instructions,
             'fields' => [
                 [
-                    'import' => $filename
-                ]
-            ]
+                    'import' => $filename,
+                ],
+            ],
         ];
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
@@ -101,11 +101,10 @@ trait SharedFunctions {
         File::put(base_path('resources/fieldsets/page_builder.yaml'), Yaml::dump($fieldset, 99, 2));
     }
 
-
     protected function getStub(string $stubPath): string
     {
-        $publishedStubPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
-        $addonStubPath = __DIR__ . "/../../resources/stubs/" . ltrim($stubPath, " /\t\n\r\0\x0B");
+        $publishedStubPath = resource_path('stubs/vendor/statamic-peak-commands/'.ltrim($stubPath, " /\t\n\r\0\x0B"));
+        $addonStubPath = __DIR__.'/../../resources/stubs/'.ltrim($stubPath, " /\t\n\r\0\x0B");
 
         return File::get(File::exists($publishedStubPath) ? $publishedStubPath : $addonStubPath);
     }
