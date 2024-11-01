@@ -4,7 +4,7 @@ namespace Larsvg\StatamicChat\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Studio1902\PeakCommands\Commands\SharedFunctions;
+use Larsvg\StatamicChat\Traits\SharedFunctions;
 
 class Publish extends Command
 {
